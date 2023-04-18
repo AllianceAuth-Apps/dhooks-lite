@@ -48,7 +48,7 @@ class _EmbedObject:
         return arr
 
     @classmethod
-    def from_dict(cls, obj_dict: dict) -> "_EmbedObject":
+    def from_dict(cls, obj_dict: dict):
         """creates a new object from the given dict"""
         args = dict()
         for param_name, param_type in get_type_hints(cls.__init__).items():

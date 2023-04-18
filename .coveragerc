@@ -13,4 +13,4 @@ omit =
     setup.py
     */tests.py
     */tests/*.py
-    doc/*
+    docs/*
