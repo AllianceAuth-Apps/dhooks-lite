@@ -15,24 +15,43 @@ pre-commit-check:
     - pip install pre-commit
     - pre-commit run --all-files
 
-# test-py38:
-#   stage: test
-#   image: python:3.8-bullseye
-#   script:
-#     - tox -e py38
+test-py36:
+  stage: test
+  image: python:3.6-bullseye
+  before_script:
+    - pip install tox
+  script:
+    - tox -e py36
 
-# test-py39:
-#   stage: test
-#   image: python:3.9-bullseye
-#   script:
-#     - tox -e py39
+test-py37:
+  stage: test
+  image: python:3.7-bullseye
+  before_script:
+    - pip install tox
+  script:
+    - tox -e py37
+
+test-py38:
+  stage: test
+  image: python:3.8-bullseye
+  before_script:
+    - pip install tox
+  script:
+    - tox -e py38
+
+test-py39:
+  stage: test
+  image: python:3.9-bullseye
+  before_script:
+    - pip install tox
+  script:
+    - tox -e py39
 
 test-py310:
   stage: test
   image: python:3.10-bullseye
   before_script:
     - pip install tox
-
   script:
     - tox -e py310
     - bash <(curl -s https://codecov.io/bash)
