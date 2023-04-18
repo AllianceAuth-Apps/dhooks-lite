@@ -11,7 +11,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name="dhooks_lite",
-    version="1.0.0a2",
+    version="1.0.0",
     packages=find_packages(),
     include_package_data=True,
     license="MIT",
@@ -22,12 +22,12 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     keywords=["discord", "webhooks", "discordwebhooks", "discordhooks"],
-    url="https://github.com/ErikKalkoken/dhooks-lite",
+    url="https://gitlab.com/ErikKalkoken/dhooks-lite",
     author="Erik Kalkoken",
     author_email="kalkoken87@gmail.com",
     classifiers=[
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: MIT License",  # example license
+        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
@@ -36,7 +36,6 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
-        "Programming Language :: Python :: Implementation :: CPython",
         "Natural Language :: English",
         "Topic :: Communications :: Chat",
         "Topic :: Software Development :: Libraries",
