@@ -1,6 +1,5 @@
 import os
 from setuptools import find_packages, setup
-from dhooks_lite.constants import APP_VERSION
 
 # read the contents of your README file
 this_directory = os.path.abspath(os.path.dirname(__file__))
@@ -12,7 +11,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name="dhooks_lite",
-    version=APP_VERSION,
+    version="1.0.0",
     packages=find_packages(),
     include_package_data=True,
     license="MIT",
