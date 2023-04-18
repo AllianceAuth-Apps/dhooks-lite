@@ -26,7 +26,7 @@ pre-commit-check:
 #   image: python:3.9-bullseye
 #   script:
 #     - tox -e py39
-  
+
 test-py310:
   stage: test
   image: python:3.10-bullseye
