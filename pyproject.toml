@@ -1,0 +1,49 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "dhooks-lite"
+version = "1.1.0"
+description = "Another simple class wrapper for interacting with Discord webhooks in Python 3"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.6"
+authors = [
+    { name = "Erik Kalkoken", email = "kalkoken87@gmail.com" },
+]
+keywords = [
+    "discord",
+    "discordhooks",
+    "discordwebhooks",
+    "webhooks",
+]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Communications :: Chat",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "requests",
+]
+
+[project.urls]
+Homepage = "https://gitlab.com/ErikKalkoken/dhooks-lite"
+Documentation = "https://dhooks-lite.readthedocs.io/en/latest/"
+Source = "https://gitlab.com/ErikKalkoken/dhooks-lite"
+Changelog = "https://gitlab.com/ErikKalkoken/dhooks-lite/-/blob/master/CHANGELOG.md"
+Tracker = "https://gitlab.com/ErikKalkoken/dhooks-lite/-/issues"
+
+[tool.flit.module]
+name = "dhooks_lite"

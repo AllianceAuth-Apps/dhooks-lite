@@ -12,3 +12,4 @@ venv/
 docs/_*/
 .tox
 htmlcov/
+coverage.xml
