@@ -1,8 +1,7 @@
 from datetime import datetime
 from unittest import TestCase
 
-from dhooks_lite.embed import Embed, Author, Footer, Field, Image, Thumbnail
-
+from dhooks_lite.embed import Author, Embed, Field, Footer, Image, Thumbnail
 from tests.utils import set_test_logger
 
 MODULE_PATH = "dhooks_lite.embed"

@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - yyyy-mm-dd
 
+## [1.1.0] - 2023-07-16
+
+### Added
+
+- Add support for Python 3.11
+- isort linting
+- Added pylint linter to CI pipeline
+
+### Changed
+
+- Migrated build process to PEP 621
+- Migrated docs to alabama theme
+
 ## [1.0.0] - 2023-04-18
 
 ### Added

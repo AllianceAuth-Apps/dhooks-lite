@@ -2,8 +2,7 @@ import datetime
 import logging
 import os
 
-from dhooks_lite import Webhook, Embed, Footer, Image, Thumbnail, Author, Field
-
+from dhooks_lite import Author, Embed, Field, Footer, Image, Thumbnail, Webhook
 
 logging.basicConfig(format="%(levelname)s: %(message)s", level=logging.INFO)
 

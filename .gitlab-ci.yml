@@ -3,7 +3,7 @@ stages:
   - test
   - deploy
 
-pre-commit-check:
+pre-commit:
   stage: checks
   image: python:3.10-bullseye
   variables:
@@ -14,6 +14,14 @@ pre-commit-check:
   script:
     - pip install pre-commit
     - pre-commit run --all-files
+
+pylint:
+  stage: checks
+  image: python:3.10-bullseye
+  before_script:
+    - pip install tox
+  script:
+    - tox -e pylint
 
 test-py36:
   stage: test
@@ -56,16 +64,30 @@ test-py310:
     - tox -e py310
     - bash <(curl -s https://codecov.io/bash)
 
+test-py311:
+  stage: test
+  image: python:3.11-bullseye
+  before_script:
+    - pip install tox
+  script:
+    - tox -e py311
+    - bash <(curl -s https://codecov.io/bash)
+
+test-docs:
+  stage: test
+  image: python:3.10-bullseye
+  before_script:
+    - pip install tox
+  script:
+    - tox -e docs
+
 deploy-pypi:
   stage: deploy
   image: python:3.10-bullseye
-
   before_script:
-    - pip install twine
-
+    - pip install -U pip twine wheel build
   script:
-    - python setup.py sdist bdist_wheel
+    - python -m build
     - twine upload dist/*
-
   only:
     - tags

@@ -1,13 +1,16 @@
-from dhooks_lite.embed import Embed
+"""Client objects."""
+
 import json
 import logging
-import requests
 from time import sleep
 from typing import List, Optional
 
+import requests
+
+from dhooks_lite.embed import Embed
+
 from .constants import APP_NAME, APP_VERSION, HOMEPAGE_URL
 from .serializers import JsonDateTimeEncoder
-
 
 logger = logging.getLogger(__name__)
 
@@ -69,18 +72,21 @@ class UserAgent:
         self._version = str(version)
 
     def __str__(self) -> str:
-        return "{} ({}, {})".format(self.name, self.url, self.version)
+        return f"{self.name} ({self.url}, {self.version})"
 
     @property
     def name(self) -> str:
+        """Return user agent's name."""
         return self._name
 
     @property
     def url(self) -> str:
+        """Return user agent's URL."""
         return self._url
 
     @property
     def version(self) -> str:
+        """Return user agent's version."""
         return self._version
 
 
@@ -117,18 +123,22 @@ class Webhook:
 
     @property
     def url(self) -> str:
+        """Return URL for this webhook."""
         return self._url
 
     @property
     def username(self) -> Optional[str]:
+        """Return username for this webhook."""
         return self._username
 
     @property
     def avatar_url(self) -> Optional[str]:
+        """Return the avatar's URL for this webhook."""
         return self._avatar_url
 
     @property
     def user_agent(self) -> UserAgent:
+        """Return the user agent for this webhook."""
         return (
             self._user_agent
             if self._user_agent
@@ -169,7 +179,7 @@ class Webhook:
         if not content and not embeds:
             raise ValueError("need content or embeds")
 
-        payload = dict()
+        payload = {}
         self._set_content(payload, content)
         self._set_embeds(payload, embeds)
         self._set_username(payload, username)
@@ -177,29 +187,10 @@ class Webhook:
         self._set_tts(payload, tts)
 
         retry_count = 0
-        r = None
-        for retry_count in range(int(max_retries) + 1):
-            logger.debug("Sending request to '%s' with payload: %s", self._url, payload)
-            params = {"wait": bool(wait_for_response)}
-            headers = {
-                "Content-Type": "application/json",
-                "User-Agent": str(self.user_agent),
-            }
-            data = json.dumps(payload, cls=JsonDateTimeEncoder)
-            r = requests.post(
-                url=self._url,
-                params=params,
-                headers=headers,
-                data=data,
-                timeout=REQUESTS_TIMEOUT,
-            )
-            if not r.ok:
-                logger.warning("HTTP status code: %s", r.status_code)
-            else:
-                logger.debug("HTTP status code: %s", r.status_code)
-
-            logger.debug("Response headers from Discord: %s", r.headers)
-            logger.debug("Response from Discord: %s", r.content)
+        while True:
+            r = self._send_request_to_webhook(payload, bool(wait_for_response))
+            if r.ok:
+                break
 
             if r.status_code in [
                 HTTP_BAD_GATEWAY,
@@ -207,16 +198,16 @@ class Webhook:
                 HTTP_SERVICE_UNAVAILABLE,
             ]:
                 retry_count += 1
-                if retry_count <= max_retries:
-                    logger.warning("Retry %d / %d", retry_count, max_retries)
-                    if retry_count > 1:
-                        wait_secs = BACKOFF_FACTOR * (2 ** (retry_count - 1))
-                        sleep(wait_secs)
+                if retry_count > max_retries:
+                    break
+
+                logger.warning("Retry %d / %d", retry_count, max_retries)
+                if retry_count > 1:
+                    wait_secs = BACKOFF_FACTOR * (2 ** (retry_count - 1))
+                    sleep(wait_secs)
+
             else:
                 break
-
-        if r is None:
-            raise RuntimeError("No request object")  # this should never be reached
 
         try:
             content_returned = r.json()
@@ -232,7 +223,7 @@ class Webhook:
         if content:
             content = str(content)
             if len(content) > self.MAX_CHARACTERS:
-                raise ValueError("content exceeds {}".format(self.MAX_CHARACTERS))
+                raise ValueError(f"content exceeds {self.MAX_CHARACTERS}")
             payload["content"] = content
 
     def _set_embeds(self, payload: dict, embeds: Optional[list]) -> None:
@@ -266,3 +257,27 @@ class Webhook:
                 raise TypeError("tts must be of type bool")
 
             payload["tts"] = tts
+
+    def _send_request_to_webhook(self, payload: dict, wait_for_response: bool):
+        logger.debug("Sending request to '%s' with payload: %s", self._url, payload)
+        params = {"wait": wait_for_response}
+        headers = {
+            "Content-Type": "application/json",
+            "User-Agent": str(self.user_agent),
+        }
+        data = json.dumps(payload, cls=JsonDateTimeEncoder)
+        r = requests.post(
+            url=self._url,
+            params=params,
+            headers=headers,
+            data=data,
+            timeout=REQUESTS_TIMEOUT,
+        )
+        if not r.ok:
+            logger.warning("HTTP status code: %s", r.status_code)
+        else:
+            logger.debug("HTTP status code: %s", r.status_code)
+
+        logger.debug("Response headers from Discord: %s", r.headers)
+        logger.debug("Response from Discord: %s", r.content)
+        return r
