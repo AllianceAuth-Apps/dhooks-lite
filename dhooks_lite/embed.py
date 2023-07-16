@@ -133,12 +133,12 @@ class Field(_EmbedObject):
         name = str(name)
         if len(name) > self.MAX_CHARACTERS_NAME:
             raise ValueError(
-                "name can not exceed {} characters".format(self.MAX_CHARACTERS_NAME)
+                f"name can not exceed {self.MAX_CHARACTERS_NAME} characters"
             )
         value = str(value)
         if len(value) > self.MAX_CHARACTERS_VALUE:
             raise ValueError(
-                "value can not exceed {} characters".format(self.MAX_CHARACTERS_VALUE)
+                f"value can not exceed {self.MAX_CHARACTERS_VALUE} characters"
             )
 
         self._name = name
@@ -300,24 +300,18 @@ class Embed(_EmbedObject):
 
         if fields:
             if len(fields) > self.MAX_FIELDS:
-                raise ValueError(
-                    "Fields can not exceed {} objects".format(self.MAX_FIELDS)
-                )
-            for f in fields:
-                if not isinstance(f, Field):
+                raise ValueError(f"Fields can not exceed {self.MAX_FIELDS} objects")
+            for field in fields:
+                if not isinstance(field, Field):
                     raise TypeError("all elements in fields must be a Field")
 
         if description and len(description) > self.MAX_DESCRIPTION:
             raise ValueError(
-                "description exceeds max length of {} characters".format(
-                    self.MAX_DESCRIPTION
-                )
+                f"description exceeds max length of {self.MAX_DESCRIPTION} characters"
             )
 
         if title and len(title) > self.MAX_TITLE:
-            raise ValueError(
-                "title exceeds max length of {} characters".format(self.MAX_TITLE)
-            )
+            raise ValueError(f"title exceeds max length of {self.MAX_TITLE} characters")
 
         self._title = str(title) if title else None
         self._type = "rich"
@@ -333,10 +327,10 @@ class Embed(_EmbedObject):
 
         d_json = json.dumps(self.asdict(), cls=JsonDateTimeEncoder)
         if len(d_json) > self.MAX_CHARACTERS:
+            limit = len(d_json) - self.MAX_CHARACTERS
             raise ValueError(
-                "Embed exceeds maximum allowed char size of {} by {}".format(
-                    self.MAX_CHARACTERS, len(d_json) - self.MAX_CHARACTERS
-                )
+                f"Embed exceeds maximum allowed char size of {self.MAX_CHARACTERS} "
+                f"by {limit}"
             )
 
     @property

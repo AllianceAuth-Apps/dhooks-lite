@@ -72,18 +72,21 @@ class UserAgent:
         self._version = str(version)
 
     def __str__(self) -> str:
-        return "{} ({}, {})".format(self.name, self.url, self.version)
+        return f"{self.name} ({self.url}, {self.version})"
 
     @property
     def name(self) -> str:
+        """Return user agent's name."""
         return self._name
 
     @property
     def url(self) -> str:
+        """Return user agent's URL."""
         return self._url
 
     @property
     def version(self) -> str:
+        """Return user agent's version."""
         return self._version
 
 
@@ -120,18 +123,22 @@ class Webhook:
 
     @property
     def url(self) -> str:
+        """Return URL for this webhook."""
         return self._url
 
     @property
     def username(self) -> Optional[str]:
+        """Return username for this webhook."""
         return self._username
 
     @property
     def avatar_url(self) -> Optional[str]:
+        """Return the avatar's URL for this webhook."""
         return self._avatar_url
 
     @property
     def user_agent(self) -> UserAgent:
+        """Return the user agent for this webhook."""
         return (
             self._user_agent
             if self._user_agent
@@ -235,7 +242,7 @@ class Webhook:
         if content:
             content = str(content)
             if len(content) > self.MAX_CHARACTERS:
-                raise ValueError("content exceeds {}".format(self.MAX_CHARACTERS))
+                raise ValueError(f"content exceeds {self.MAX_CHARACTERS}")
             payload["content"] = content
 
     def _set_embeds(self, payload: dict, embeds: Optional[list]) -> None:
