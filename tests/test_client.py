@@ -1,5 +1,7 @@
-# this test script expects the dhooks_lite module to be installed
-# in the current environment, e.g. with pip install -e
+"""Note: This test script expects the dhooks_lite module to be installed
+in the current environment, e.g. with pip install -e
+"""
+
 import json
 import logging
 from unittest import TestCase
@@ -39,16 +41,17 @@ def my_sleep(value):
 
 @requests_mock.Mocker()
 class TestWebhook(TestCase):
-    def setUp(self):
-        """
-        mock_response = Mock()
-        mock_response.headers = {'headers': True}
-        mock_response.status_code = 200
-        mock_response.ok = True
-        mock_response.json.return_value = {'message': True}
-        mock_response.headers = {'dummy-header': 'abc'}
-        self.response = mock_response
-        """
+    def test_has_repr(self, requests_mocker):
+        # given
+        obj = Webhook(TEST_URL_1)
+        # then
+        self.assertTrue(repr(obj))
+
+    def test_has_str(self, requests_mocker):
+        # given
+        obj = Webhook(TEST_URL_1)
+        # then
+        self.assertTrue(str(obj))
 
     def test_can_set_webhook_url(self, requests_mocker):
         requests_mocker.register_uri(
@@ -97,7 +100,7 @@ class TestWebhook(TestCase):
 
     def test_detects_missing_webhook_url(self, requests_mocker):
         with self.assertRaises(ValueError):
-            Webhook(None)
+            Webhook(None)  # type: ignore
 
         self.assertFalse(requests_mocker.called)
 
@@ -198,14 +201,14 @@ class TestWebhook(TestCase):
     def test_detect_wrong_tts_type(self, requests_mocker):
         hook = Webhook(TEST_URL_1)
         with self.assertRaises(TypeError):
-            hook.execute("Hi there", tts=int(5))
+            hook.execute("Hi there", tts=int(5))  # type: ignore
 
         self.assertFalse(requests_mocker.called)
 
     def test_detects_wrong_embeds_type(self, requests_mocker):
         hook = Webhook(TEST_URL_1)
         with self.assertRaises(TypeError):
-            hook.execute("dummy", embeds=int(5))
+            hook.execute("dummy", embeds=int(5))  # type: ignore
 
         self.assertFalse(requests_mocker.called)
 

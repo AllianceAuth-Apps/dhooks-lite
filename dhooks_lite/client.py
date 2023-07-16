@@ -187,9 +187,10 @@ class Webhook:
         self._set_tts(payload, tts)
 
         retry_count = 0
-        r = None
-        for retry_count in range(int(max_retries) + 1):
+        while True:
             r = self._send_request_to_webhook(payload, bool(wait_for_response))
+            if r.ok:
+                break
 
             if r.status_code in [
                 HTTP_BAD_GATEWAY,
@@ -197,16 +198,16 @@ class Webhook:
                 HTTP_SERVICE_UNAVAILABLE,
             ]:
                 retry_count += 1
-                if retry_count <= max_retries:
-                    logger.warning("Retry %d / %d", retry_count, max_retries)
-                    if retry_count > 1:
-                        wait_secs = BACKOFF_FACTOR * (2 ** (retry_count - 1))
-                        sleep(wait_secs)
+                if retry_count > max_retries:
+                    break
+
+                logger.warning("Retry %d / %d", retry_count, max_retries)
+                if retry_count > 1:
+                    wait_secs = BACKOFF_FACTOR * (2 ** (retry_count - 1))
+                    sleep(wait_secs)
+
             else:
                 break
-
-        if r is None:
-            raise RuntimeError("No request object")  # this should never be reached
 
         try:
             content_returned = r.json()
