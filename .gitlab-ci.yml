@@ -3,7 +3,7 @@ stages:
   - test
   - deploy
 
-pre-commit-check:
+pre-commit:
   stage: checks
   image: python:3.10-bullseye
   variables:
@@ -64,6 +64,14 @@ test-py311:
   script:
     - tox -e py311
     - bash <(curl -s https://codecov.io/bash)
+
+test-docs:
+  stage: test
+  image: python:3.10-bullseye
+  before_script:
+    - pip install tox
+  script:
+    - tox -e docs
 
 deploy-pypi:
   stage: deploy
