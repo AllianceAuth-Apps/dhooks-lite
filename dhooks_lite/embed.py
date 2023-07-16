@@ -63,8 +63,8 @@ class _EmbedObject:
                     origin_type = param_type
 
                 if issubclass(origin_type, list):
-                    MyType = list(param_type.__args__).pop()
-                    value = [MyType(**obj) for obj in obj_dict[param_name]]
+                    my_type = list(param_type.__args__).pop()
+                    value = [my_type(**obj) for obj in obj_dict[param_name]]
 
                 elif issubclass(origin_type, _EmbedObject):
                     value = param_type.from_dict(obj_dict[param_name])
@@ -97,18 +97,22 @@ class Author(_EmbedObject):
 
     @property
     def name(self) -> str:
+        """Return author name."""
         return self._name
 
     @property
     def url(self) -> Optional[str]:
+        """Return author URL."""
         return self._url
 
     @property
     def icon_url(self) -> Optional[str]:
+        """Return author's icon URL."""
         return self._icon_url
 
     @property
     def proxy_icon_url(self) -> Optional[str]:
+        """Return author's proxy icon URL."""
         return self._proxy_icon_url
 
 
@@ -143,14 +147,17 @@ class Field(_EmbedObject):
 
     @property
     def name(self) -> str:
+        """Return field name."""
         return self._name
 
     @property
     def value(self) -> str:
+        """Return field value."""
         return self._value
 
     @property
     def inline(self) -> Optional[bool]:
+        """Return field inline."""
         return self._inline
 
 
@@ -172,14 +179,17 @@ class Footer(_EmbedObject):
 
     @property
     def text(self) -> str:
+        """Return Footer text."""
         return self._text
 
     @property
     def icon_url(self) -> Optional[str]:
+        """Return footer's icon URL."""
         return self._icon_url
 
     @property
     def proxy_icon_url(self) -> Optional[str]:
+        """Return footer's proxy icon URL."""
         return self._proxy_icon_url
 
 
@@ -207,18 +217,22 @@ class Image(_EmbedObject):
 
     @property
     def url(self) -> str:
+        """Return image URL."""
         return self._url
 
     @property
     def proxy_url(self) -> Optional[str]:
+        """Return image's proxy URL."""
         return self._proxy_url
 
     @property
     def height(self) -> Optional[int]:
+        """Return image height."""
         return self._height
 
     @property
     def width(self) -> Optional[int]:
+        """Return image width."""
         return self._width
 
 
@@ -268,16 +282,22 @@ class Embed(_EmbedObject):
         """
         if timestamp and not isinstance(timestamp, datetime):
             raise TypeError("timestamp must be a datetime object")
+
         if footer and not isinstance(footer, Footer):
             raise TypeError("footer must be a Footer object")
+
         if image and not isinstance(image, Image):
             raise TypeError("image must be an Image object")
+
         if thumbnail and not isinstance(thumbnail, Thumbnail):
             raise TypeError("thumbnail must be a Thumbnail object")
+
         if author and not isinstance(author, Author):
             raise TypeError("author must be a Author object")
+
         if fields and not isinstance(fields, list):
             raise TypeError("fields must be a list")
+
         if fields:
             if len(fields) > self.MAX_FIELDS:
                 raise ValueError(
@@ -321,44 +341,55 @@ class Embed(_EmbedObject):
 
     @property
     def description(self) -> Optional[str]:
+        """Return embed's description."""
         return self._description
 
     @property
     def title(self) -> Optional[str]:
+        """Return embed's title or None."""
         return self._title
 
     @property
     def type(self) -> Optional[str]:
+        """Return embed's type or None."""
         return self._type
 
     @property
     def url(self) -> Optional[str]:
+        """Return embed's URL or None."""
         return self._url
 
     @property
     def timestamp(self) -> Optional[datetime]:
+        """Return embed's timestamp or None."""
         return self._timestamp
 
     @property
     def color(self) -> Optional[int]:
+        """Return embed's color or None."""
         return self._color
 
     @property
     def footer(self) -> Optional[Footer]:
+        """Return embed's footer or None."""
         return self._footer
 
     @property
     def image(self) -> Optional[Image]:
+        """Return embed's image or None."""
         return self._image
 
     @property
     def thumbnail(self) -> Optional[Thumbnail]:
+        """Return embed's thumbnail or None."""
         return self._thumbnail
 
     @property
     def author(self) -> Optional[Author]:
+        """Return embed's author or None."""
         return self._author
 
     @property
     def fields(self) -> Optional[List[Field]]:
+        """Return embed's fields or None."""
         return self._fields
