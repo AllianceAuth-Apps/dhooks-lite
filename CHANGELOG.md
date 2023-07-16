@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Add support for Python 3.11
 - isort linting
+- Added pylint linter to CI pipeline
 
 ### Changed
 
