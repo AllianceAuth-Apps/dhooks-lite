@@ -1,5 +1,7 @@
 # dhooks-lite
 
+Another simple class wrapper for interacting with Discord webhooks.
+
 [![release](https://img.shields.io/pypi/v/dhooks-lite?label=release)](https://pypi.org/project/dhooks-lite/)
 [![python](https://img.shields.io/pypi/pyversions/dhooks-lite)](https://pypi.org/project/dhooks-lite/)
 [![pipeline status](https://gitlab.com/ErikKalkoken/dhooks-lite/badges/master/pipeline.svg)](https://gitlab.com/ErikKalkoken/dhooks-lite/-/commits/master)
@@ -18,7 +20,6 @@
 - [Installation](#installation)
 - [Documentation](#documentation)
 - [Contribution](#contribution)
-- [Change Log](CHANGELOG.md)
 
 ## Overview
 

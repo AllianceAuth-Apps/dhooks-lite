@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 [project]
 name = "dhooks-lite"
 version = "1.1.0"
-description = "Another simple class wrapper for interacting with Discord webhooks in Python 3"
+description = "Another simple class wrapper for interacting with Discord webhooks."
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.6"

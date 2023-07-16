@@ -1,3 +1,5 @@
+"""Client objects."""
+
 import json
 import logging
 from time import sleep

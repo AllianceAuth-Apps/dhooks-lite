@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - Migrated build process to PEP 621
+- Migrated docs to alabama theme
 
 ## [1.0.0] - 2023-04-18
 
