@@ -179,7 +179,7 @@ class Webhook:
         if not content and not embeds:
             raise ValueError("need content or embeds")
 
-        payload = dict()
+        payload = {}
         self._set_content(payload, content)
         self._set_embeds(payload, embeds)
         self._set_username(payload, username)
@@ -189,27 +189,7 @@ class Webhook:
         retry_count = 0
         r = None
         for retry_count in range(int(max_retries) + 1):
-            logger.debug("Sending request to '%s' with payload: %s", self._url, payload)
-            params = {"wait": bool(wait_for_response)}
-            headers = {
-                "Content-Type": "application/json",
-                "User-Agent": str(self.user_agent),
-            }
-            data = json.dumps(payload, cls=JsonDateTimeEncoder)
-            r = requests.post(
-                url=self._url,
-                params=params,
-                headers=headers,
-                data=data,
-                timeout=REQUESTS_TIMEOUT,
-            )
-            if not r.ok:
-                logger.warning("HTTP status code: %s", r.status_code)
-            else:
-                logger.debug("HTTP status code: %s", r.status_code)
-
-            logger.debug("Response headers from Discord: %s", r.headers)
-            logger.debug("Response from Discord: %s", r.content)
+            r = self._send_request_to_webhook(payload, bool(wait_for_response))
 
             if r.status_code in [
                 HTTP_BAD_GATEWAY,
@@ -276,3 +256,27 @@ class Webhook:
                 raise TypeError("tts must be of type bool")
 
             payload["tts"] = tts
+
+    def _send_request_to_webhook(self, payload: dict, wait_for_response: bool):
+        logger.debug("Sending request to '%s' with payload: %s", self._url, payload)
+        params = {"wait": wait_for_response}
+        headers = {
+            "Content-Type": "application/json",
+            "User-Agent": str(self.user_agent),
+        }
+        data = json.dumps(payload, cls=JsonDateTimeEncoder)
+        r = requests.post(
+            url=self._url,
+            params=params,
+            headers=headers,
+            data=data,
+            timeout=REQUESTS_TIMEOUT,
+        )
+        if not r.ok:
+            logger.warning("HTTP status code: %s", r.status_code)
+        else:
+            logger.debug("HTTP status code: %s", r.status_code)
+
+        logger.debug("Response headers from Discord: %s", r.headers)
+        logger.debug("Response from Discord: %s", r.content)
+        return r

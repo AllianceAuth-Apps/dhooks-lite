@@ -31,11 +31,11 @@ class _EmbedObject:
 
         will not include properties that are None
         """
-        arr = dict()
+        arr = {}
         for key, value in self.__dict__.items():
             if value is not None:
                 if isinstance(value, list):
-                    v_list = list()
+                    v_list = []
                     for elem in value:
                         if isinstance(elem, _EmbedObject):
                             v_list.append(elem.asdict())
@@ -52,7 +52,7 @@ class _EmbedObject:
     @classmethod
     def from_dict(cls, obj_dict: dict):
         """creates a new object from the given dict"""
-        args = dict()
+        args = {}
         for param_name, param_type in get_type_hints(cls.__init__).items():
             if param_name in obj_dict and param_name != "return":
                 if hasattr(param_type, "__origin__") and param_type.__origin__ == Union:
@@ -242,6 +242,8 @@ class Thumbnail(Image):
 
 class Embed(_EmbedObject):
     """Embedded content for a message"""
+
+    # pylint: disable=too-many-instance-attributes
 
     MAX_CHARACTERS = 6000
     MAX_TITLE = 256
