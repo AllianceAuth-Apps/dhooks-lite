@@ -6,3 +6,4 @@ API Reference
 
 .. automodule:: dhooks_lite
     :members:
+    :inherited-members:

@@ -237,11 +237,11 @@ class Image(_EmbedObject):
 
 
 class Thumbnail(Image):
-    """Thumbnail in an Embed"""
+    """Thumbnail in an Embed."""
 
 
 class Embed(_EmbedObject):
-    """Embedded content for a message"""
+    """Embedded content for a message."""
 
     # pylint: disable=too-many-instance-attributes
 
