@@ -1,7 +1,7 @@
+import json
 import logging
 from datetime import datetime
-import json
-from typing import Any, List, get_type_hints, Union, Optional
+from typing import Any, List, Optional, Union, get_type_hints
 
 from .serializers import JsonDateTimeEncoder
 

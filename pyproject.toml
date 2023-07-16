@@ -48,6 +48,8 @@ Tracker = "https://gitlab.com/ErikKalkoken/dhooks-lite/-/issues"
 [tool.flit.module]
 name = "dhooks_lite"
 
+[tool.isort]
+profile = "black"
 
 [tool.pylint.'MASTER']
 ignore-patterns = ["__init__.py"]

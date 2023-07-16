@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.1.0] - 2023-07-16
 
+### Added
+
+- isort linting
+
 ### Changed
 
 - Migrated build process to PEP 621

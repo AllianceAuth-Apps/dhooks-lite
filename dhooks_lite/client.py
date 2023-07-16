@@ -1,13 +1,14 @@
-from dhooks_lite.embed import Embed
 import json
 import logging
-import requests
 from time import sleep
 from typing import List, Optional
 
+import requests
+
+from dhooks_lite.embed import Embed
+
 from .constants import APP_NAME, APP_VERSION, HOMEPAGE_URL
 from .serializers import JsonDateTimeEncoder
-
 
 logger = logging.getLogger(__name__)
 

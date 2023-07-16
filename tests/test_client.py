@@ -7,9 +7,8 @@ from unittest.mock import Mock, patch
 
 import requests_mock
 
-from dhooks_lite import Webhook, WebhookResponse, UserAgent, Embed
+from dhooks_lite import Embed, UserAgent, Webhook, WebhookResponse
 from dhooks_lite.constants import APP_NAME, APP_VERSION, HOMEPAGE_URL
-
 from tests.utils import set_test_logger
 
 MODULE_PATH = "dhooks_lite.client"

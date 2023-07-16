@@ -1,9 +1,8 @@
-from datetime import datetime
 import json
+from datetime import datetime
 from unittest import TestCase
 
 from dhooks_lite.serializers import JsonDateTimeEncoder
-
 from tests.utils import set_test_logger
 
 MODULE_PATH = "dhooks_lite.serializers"
