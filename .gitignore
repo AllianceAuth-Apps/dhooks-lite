@@ -9,7 +9,7 @@ build/
 *.egg-info/
 venv/
 .coverage
-docs/_*/
+docs/_build/
 .tox
 htmlcov/
 coverage.xml
