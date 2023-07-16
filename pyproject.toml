@@ -4,8 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "dhooks-lite"
-version = "1.1.0"
-description = "Another simple class wrapper for interacting with Discord webhooks."
+dynamic = ["version", "description"]
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.6"
@@ -64,4 +63,4 @@ max-line-length = 120
 
 [tool.pylint.'MESSAGES CONTROL']
 # disable = ["E5142", "E1101", "W0511","R0902", "R0903", "R0913", "R0911", "R0801", "C0415"]
-disable = ["R", "C"]
+disable = ["R"]
