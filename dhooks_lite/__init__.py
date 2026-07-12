@@ -1,7 +1,7 @@
 """A wrapper for sending messages to Discord webhooks."""
 
-from .client import UserAgent, Webhook, WebhookResponse
-from .embed import Author, Embed, Field, Footer, Image, Thumbnail
+from dhooks_lite.client import UserAgent, Webhook, WebhookResponse
+from dhooks_lite.embed import Author, Embed, Field, Footer, Image, Thumbnail
 
 __version__ = "1.1.0"
 __title__ = "dhooks_lite"

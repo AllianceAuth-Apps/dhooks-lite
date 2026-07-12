@@ -8,8 +8,7 @@ from typing import List, Optional
 import requests
 
 from dhooks_lite.embed import Embed
-
-from .serializers import JsonDateTimeEncoder
+from dhooks_lite.serializers import JsonDateTimeEncoder
 
 logger = logging.getLogger(__name__)
 
