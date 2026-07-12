@@ -9,25 +9,30 @@ from unittest.mock import Mock, patch
 
 import requests_mock
 
-from dhooks_lite import Embed, UserAgent, Webhook, WebhookResponse
-from dhooks_lite.constants import APP_NAME, APP_VERSION, HOMEPAGE_URL
-from tests.utils import set_test_logger
+from dhooks_lite import (
+    Embed,
+    UserAgent,
+    Webhook,
+    WebhookResponse,
+    __title__,
+    __url__,
+    __version__,
+)
 
 MODULE_PATH = "dhooks_lite.client"
-logger = set_test_logger(MODULE_PATH, __file__)
 
 TEST_URL_1 = "https://www.example.com/test-url-1/"
 TEST_URL_2 = "https://www.example.com/test-url-2/"
 
 
-def extract_contents(requests_mocker):
+def extract_contents(requests_mocker: Mock):
     """extract results from mock requests"""
     url = None
     json_data = None
     for x in requests_mocker.post.call_args:
-        if type(x) == dict and "url" in x:
+        if type(x) is dict and "url" in x:
             url = x["url"]
-        if type(x) == dict and "data" in x:
+        if type(x) is dict and "data" in x:
             json_data = json.loads(x["data"])
 
     return url, json_data
@@ -80,7 +85,7 @@ class TestWebhook(TestCase):
         self.assertEqual(headers["Content-Type"], "application/json")
         self.assertEqual(
             headers["User-Agent"],
-            "{} ({}, {})".format(APP_NAME, HOMEPAGE_URL, APP_VERSION),
+            "{} ({}, {})".format(__title__, __url__, __version__),
         )
 
     def test_request_has_custom_user_agent(self, requests_mocker):
@@ -143,7 +148,7 @@ class TestWebhook(TestCase):
 
         hook = Webhook(TEST_URL_1)
         response = hook.execute("Hi there", wait_for_response=True)
-        self.assertDictEqual(response.content, {"message": True})
+        self.assertEqual(response.content, {"message": True})
 
     def test_detects_missing_content_and_embed(self, requests_mocker):
         hook = Webhook(TEST_URL_1)
@@ -414,7 +419,7 @@ class TestWebhookResponse(TestCase):
 
     def test_content(self):
         expected = {"username": "Bruce Wayne", "content": "Checkout this new report"}
-        self.assertDictEqual(self.response.content, expected)
+        self.assertEqual(self.response.content, expected)
 
     def test_create(self):
         obj = WebhookResponse(
@@ -455,7 +460,7 @@ class TestWebhookAndEmbed(TestCase):
         hook = Webhook(TEST_URL_1)
         e = Embed(description="Hello, world!")
         hook.execute(embeds=[e])
-        url, json = extract_contents(requests_mocker)
+        _, json = extract_contents(requests_mocker)
         self.assertIn("embeds", json)
         self.assertEqual(len(json["embeds"]), 1)
         self.assertDictEqual(
@@ -469,7 +474,7 @@ class TestWebhookAndEmbed(TestCase):
         e1 = Embed(description="Hello, world!")
         e2 = Embed(description="Hello, world! Again!")
         hook.execute("How is it going?", embeds=[e1, e2])
-        url, json = extract_contents(requests_mocker)
+        _, json = extract_contents(requests_mocker)
         self.assertIn("embeds", json)
         self.assertEqual(len(json["embeds"]), 2)
         self.assertDictEqual(

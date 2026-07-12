@@ -1,11 +1,9 @@
-from datetime import datetime
+import datetime as dt
 from unittest import TestCase
 
 from dhooks_lite.embed import Author, Embed, Field, Footer, Image, Thumbnail
-from tests.utils import set_test_logger
 
 MODULE_PATH = "dhooks_lite.embed"
-logger = set_test_logger(MODULE_PATH, __file__)
 
 
 class TestEmbedObjectComparing(TestCase):
@@ -38,7 +36,7 @@ class TestEmbedObject(TestCase):
 class TestAuthor(TestCase):
     def test_detect_missing_params_on_create(self):
         with self.assertRaises(ValueError):
-            Author(None)
+            Author(None)  # type: ignore
 
     def test_create_with_name_only(self):
         x = Author("Bruce Wayne")
@@ -65,7 +63,7 @@ class TestAuthor(TestCase):
 class TestField(TestCase):
     def test_detect_missing_params_on_create(self):
         with self.assertRaises(ValueError):
-            Field(name=None, value=None)
+            Field(name=None, value=None)  # type: ignore
 
     def test_detects_name_limit(self):
         large_string = "x" * 257
@@ -79,11 +77,11 @@ class TestField(TestCase):
 
     def test_detect_missing_value(self):
         with self.assertRaises(ValueError):
-            Field(name="Bruce Wayne", value=None)
+            Field(name="Bruce Wayne", value=None)  # type: ignore
 
     def test_detect_missing_name(self):
         with self.assertRaises(ValueError):
-            Field(name=None, value="Batman")
+            Field(name=None, value="Batman")  # type: ignore
 
     def test_create_with_name_and_value_only(self):
         x = Field("fruit", "orange")
@@ -105,17 +103,17 @@ class TestField(TestCase):
 
     def test_detect_invalid_inline_type(self):
         with self.assertRaises(TypeError):
-            Field(name="fruit", value="orange", inline=int(5))
+            Field(name="fruit", value="orange", inline=int(5))  # type: ignore
 
 
 class TestFooter(TestCase):
     def test_detect_missing_params_on_create(self):
         with self.assertRaises(ValueError):
-            Footer(None)
+            Footer(None)  # type: ignore
 
     def test_detects_wrong_type_inline(self):
         with self.assertRaises(TypeError):
-            Footer("Justice League", inline=int(1))
+            Footer("Justice League", inline=int(1))  # type: ignore
 
     def test_create_with_name_only(self):
         x = Footer("Justice League")
@@ -136,7 +134,7 @@ class TestFooter(TestCase):
 class TestImage(TestCase):
     def test_detect_missing_params_on_create(self):
         with self.assertRaises(ValueError):
-            Image(None)
+            Image(None)  # type: ignore
 
     def test_create_with_url_only(self):
         x = Image("my-url")
@@ -165,7 +163,7 @@ class TestImage(TestCase):
 
 class TestEmbed(TestCase):
     def setUp(self) -> None:
-        self.now = datetime.utcnow()
+        self.now = dt.datetime.now()
 
     def test_create_with_description_only(self):
         x = Embed(description="They said the age of heroes would never come again.")
@@ -273,31 +271,31 @@ class TestEmbed(TestCase):
 
     def test_detects_wrong_type_timestamp(self):
         with self.assertRaises(TypeError):
-            Embed(timestamp=int(1))
+            Embed(timestamp=int(1))  # type: ignore
 
     def test_detects_wrong_type_footer(self):
         with self.assertRaises(TypeError):
-            Embed(footer=int(1))
+            Embed(footer=int(1))  # type: ignore
 
     def test_detects_wrong_type_image(self):
         with self.assertRaises(TypeError):
-            Embed(image=int(1))
+            Embed(image=int(1))  # type: ignore
 
     def test_detects_wrong_type_thumbnail(self):
         with self.assertRaises(TypeError):
-            Embed(thumbnail=int(1))
+            Embed(thumbnail=int(1))  # type: ignore
 
     def test_detects_wrong_type_author(self):
         with self.assertRaises(TypeError):
-            Embed(author=int(1))
+            Embed(author=int(1))  # type: ignore
 
     def test_detects_wrong_type_fields_list(self):
         with self.assertRaises(TypeError):
-            Embed(fields=int(1))
+            Embed(fields=int(1))  # type: ignore
 
     def test_detects_wrong_type_fields_content(self):
         with self.assertRaises(TypeError):
-            Embed(fields=[int(1), Field("x", 1)])
+            Embed(fields=[int(1), Field("x", 1)])  # type: ignore
 
     def test_detects_max_embed_limit(self):
         description = "x" * 2000
