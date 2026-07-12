@@ -9,8 +9,15 @@ from unittest.mock import Mock, patch
 
 import requests_mock
 
-from dhooks_lite import Embed, UserAgent, Webhook, WebhookResponse
-from dhooks_lite.constants import APP_NAME, APP_VERSION, HOMEPAGE_URL
+from dhooks_lite import (
+    Embed,
+    UserAgent,
+    Webhook,
+    WebhookResponse,
+    __title__,
+    __url__,
+    __version__,
+)
 from tests.utils import set_test_logger
 
 MODULE_PATH = "dhooks_lite.client"
@@ -80,7 +87,7 @@ class TestWebhook(TestCase):
         self.assertEqual(headers["Content-Type"], "application/json")
         self.assertEqual(
             headers["User-Agent"],
-            "{} ({}, {})".format(APP_NAME, HOMEPAGE_URL, APP_VERSION),
+            "{} ({}, {})".format(__title__, __url__, __version__),
         )
 
     def test_request_has_custom_user_agent(self, requests_mocker):
