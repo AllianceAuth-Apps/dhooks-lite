@@ -25,9 +25,9 @@ def extract_contents(requests_mocker):
     url = None
     json_data = None
     for x in requests_mocker.post.call_args:
-        if type(x) == dict and "url" in x:
+        if type(x) is dict and "url" in x:
             url = x["url"]
-        if type(x) == dict and "data" in x:
+        if type(x) is dict and "data" in x:
             json_data = json.loads(x["data"])
 
     return url, json_data

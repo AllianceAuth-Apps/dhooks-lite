@@ -6,21 +6,12 @@ build-backend = "flit_core.buildapi"
 name = "dhooks-lite"
 dynamic = ["version", "description"]
 readme = "README.md"
-license = {file = "LICENSE"}
-requires-python = ">=3.6"
-authors = [
-    { name = "Erik Kalkoken", email = "kalkoken87@gmail.com" },
-]
-keywords = [
-    "discord",
-    "discordhooks",
-    "discordwebhooks",
-    "webhooks",
-]
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+authors = [{ name = "Erik Kalkoken", email = "kalkoken87@gmail.com" }]
+keywords = ["discord", "webhooks"]
 classifiers = [
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
@@ -35,15 +26,13 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = [
-    "requests",
-]
+dependencies = ["requests"]
 [project.optional-dependencies]
 test = ["coverage", "requests-mock"]
 
 [project.urls]
-Homepage = "https://gitlab.com/ErikKalkoken/dhooks-lite"
-Documentation = "https://dhooks-lite.readthedocs.io/en/latest/"
+Homepage = "https://github.com/AllianceAuth-Apps/dhooks-lite"
+Documentation = "https://dhooks-lite.readthedocs.io"
 
 [tool.flit.module]
 name = "dhooks_lite"

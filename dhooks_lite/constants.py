@@ -1,5 +1,5 @@
-""""Constants for dhooks lite."""
+"""Constants for dhooks lite."""
 
 APP_NAME = "dhooks_lite"
 APP_VERSION = "1.0.0"
-HOMEPAGE_URL = "https://gitlab.com/ErikKalkoken/dhooks-lite"
+HOMEPAGE_URL = "https://github.com/AllianceAuth-Apps/dhooks-lite"

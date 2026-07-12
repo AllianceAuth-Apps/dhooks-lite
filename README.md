@@ -4,10 +4,10 @@ Another simple class wrapper for interacting with Discord webhooks.
 
 [![release](https://img.shields.io/pypi/v/dhooks-lite?label=release)](https://pypi.org/project/dhooks-lite/)
 [![python](https://img.shields.io/pypi/pyversions/dhooks-lite)](https://pypi.org/project/dhooks-lite/)
-[![pipeline status](https://gitlab.com/ErikKalkoken/dhooks-lite/badges/master/pipeline.svg)](https://gitlab.com/ErikKalkoken/dhooks-lite/-/commits/master)
+[![CI/CD Pipeline](https://github.com/AllianceAuth-Apps/dhooks-lite/actions/workflows/ci-cd.yaml/badge.svg)](https://github.com/AllianceAuth-Apps/dhooks-lite/actions/workflows/ci-cd.yaml)
 [![codecov](https://codecov.io/gl/ErikKalkoken/dhooks-lite/branch/master/graph/badge.svg?token=9YNL3HEJ5D)](https://codecov.io/gl/ErikKalkoken/dhooks-lite)
 [![Documentation Status](https://readthedocs.org/projects/dhooks-lite/badge/?version=latest)](https://dhooks-lite.readthedocs.io/en/latest/?badge=latest)
-[![license](https://img.shields.io/badge/license-MIT-green)](https://gitlab.com/ErikKalkoken/dhooks-lite/-/blob/master/LICENSE)
+[![license](https://img.shields.io/badge/license-MIT-green)](https://github.com/AllianceAuth-Apps/dhooks-lite#MIT-1-ov-file)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![chat](https://img.shields.io/discord/790364535294132234)](https://discord.gg/zmh52wnfvM)
@@ -132,7 +132,7 @@ pip install dhooks-lite
 
 ## Documentation
 
-For a full documentation of all classes please see the official docs [here](https://dhooks-lite.readthedocs.io/en/latest/).
+For a full documentation of all classes please see the [official docs](https://dhooks-lite.readthedocs.io/en/latest/).
 
 ## Contribution
 

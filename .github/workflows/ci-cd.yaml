@@ -63,7 +63,7 @@ jobs:
         uses: codecov/codecov-action@v6
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          slug: AllianceAuth-Apps/django-eveuniverse
+          slug: AllianceAuth-Apps/dhooks-lite
 
   test-docs:
     runs-on: ubuntu-latest
