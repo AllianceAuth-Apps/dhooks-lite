@@ -91,7 +91,7 @@ e1 = Embed(
     description='Only a few years ago, scientists stumbled upon an electrical current of cosmic proportions.(...)',
     title='Universe\'s highest electric current found',
     url='https://www.newscientist.com/article/mg21028174-900-universes-highest-electric-current-found/',
-    timestamp=datetime.datetime.utcnow(),
+    timestamp=datetime.datetime.now(),
     color=0x5CDBF0,
     footer=Footer(
         'Science Department',

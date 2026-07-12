@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime as dt
 from unittest import TestCase
 
 from dhooks_lite.embed import Author, Embed, Field, Footer, Image, Thumbnail
@@ -165,7 +165,7 @@ class TestImage(TestCase):
 
 class TestEmbed(TestCase):
     def setUp(self) -> None:
-        self.now = datetime.utcnow()
+        self.now = dt.datetime.now()
 
     def test_create_with_description_only(self):
         x = Embed(description="They said the age of heroes would never come again.")
