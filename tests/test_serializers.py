@@ -4,10 +4,8 @@ from unittest import TestCase
 
 from dhooks_lite.embed import Author
 from dhooks_lite.serializers import JsonDateTimeEncoder
-from tests.utils import set_test_logger
 
 MODULE_PATH = "dhooks_lite.serializers"
-logger = set_test_logger(MODULE_PATH, __file__)
 
 
 class TestJsonDateTimeEncoder(TestCase):

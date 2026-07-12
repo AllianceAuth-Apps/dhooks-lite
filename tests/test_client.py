@@ -18,16 +18,14 @@ from dhooks_lite import (
     __url__,
     __version__,
 )
-from tests.utils import set_test_logger
 
 MODULE_PATH = "dhooks_lite.client"
-logger = set_test_logger(MODULE_PATH, __file__)
 
 TEST_URL_1 = "https://www.example.com/test-url-1/"
 TEST_URL_2 = "https://www.example.com/test-url-2/"
 
 
-def extract_contents(requests_mocker):
+def extract_contents(requests_mocker: Mock):
     """extract results from mock requests"""
     url = None
     json_data = None
@@ -150,7 +148,7 @@ class TestWebhook(TestCase):
 
         hook = Webhook(TEST_URL_1)
         response = hook.execute("Hi there", wait_for_response=True)
-        self.assertDictEqual(response.content, {"message": True})
+        self.assertEqual(response.content, {"message": True})
 
     def test_detects_missing_content_and_embed(self, requests_mocker):
         hook = Webhook(TEST_URL_1)
@@ -421,7 +419,7 @@ class TestWebhookResponse(TestCase):
 
     def test_content(self):
         expected = {"username": "Bruce Wayne", "content": "Checkout this new report"}
-        self.assertDictEqual(self.response.content, expected)
+        self.assertEqual(self.response.content, expected)
 
     def test_create(self):
         obj = WebhookResponse(
@@ -462,7 +460,7 @@ class TestWebhookAndEmbed(TestCase):
         hook = Webhook(TEST_URL_1)
         e = Embed(description="Hello, world!")
         hook.execute(embeds=[e])
-        url, json = extract_contents(requests_mocker)
+        _, json = extract_contents(requests_mocker)
         self.assertIn("embeds", json)
         self.assertEqual(len(json["embeds"]), 1)
         self.assertDictEqual(
@@ -476,7 +474,7 @@ class TestWebhookAndEmbed(TestCase):
         e1 = Embed(description="Hello, world!")
         e2 = Embed(description="Hello, world! Again!")
         hook.execute("How is it going?", embeds=[e1, e2])
-        url, json = extract_contents(requests_mocker)
+        _, json = extract_contents(requests_mocker)
         self.assertIn("embeds", json)
         self.assertEqual(len(json["embeds"]), 2)
         self.assertDictEqual(
